@@ -22,5 +22,5 @@ jobs:
     - name: Release
       uses: ncipollo/release-action@v1
       with:
-        tag: "release"
+        tag: "$GITHUB_SHA"
         artifacts: "bin/adcl/*"   
