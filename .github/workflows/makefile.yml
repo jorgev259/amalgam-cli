@@ -1,6 +1,7 @@
-name: Makefile CI
+name: Build & Release
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
@@ -8,12 +9,17 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Install dependencies
+    
+    - name: Build
       run: make build
       
+    - name: Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "release.tar.gz,foo/*.txt"   
